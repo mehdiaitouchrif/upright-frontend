@@ -1,0 +1,35 @@
+.button {
+	display: inline-block;
+	padding: 0.5rem 1rem;
+	font-size: 1rem;
+	font-family: inherit;
+	border-radius: 2px;
+	border: none;
+	color: #fff;
+	cursor: pointer;
+	transition: 300ms background-color ease;
+
+	&--dark {
+		background-color: #333;
+
+		&:hover {
+			background-color: darken($color: #333, $amount: 7.5%);
+		}
+	}
+
+	&--blue {
+		background-color: blue;
+
+		&:hover {
+			background-color: darken($color: blue, $amount: 7.5%);
+		}
+	}
+
+	&--red {
+		background-color: red;
+
+		&:hover {
+			background-color: darken($color: red, $amount: 7.5%);
+		}
+	}
+}
