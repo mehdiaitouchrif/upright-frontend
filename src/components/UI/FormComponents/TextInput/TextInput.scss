@@ -1,15 +1,15 @@
 .textInput {
 	display: inline-block;
 	width: 100%;
-	border: 1px solid var(--gray-light);
-	border-radius: 2px;
+	border: 0.1rem solid var(--gray-light);
+	border-radius: 4px;
 	outline: none;
 	font-size: 1rem;
 	font-family: inherit;
 	padding: 0.5rem 0.75rem;
-	transition: 500ms border ease;
+	transition: 300ms border ease;
 
 	&:focus {
-		border: 1px solid var(--gray-dark);
+		border: 0.1rem solid var(--red);
 	}
 }

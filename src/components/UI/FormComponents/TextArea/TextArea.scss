@@ -2,12 +2,12 @@
 	height: 5rem;
 	width: 100%;
 	outline: none;
-	border: 1px solid var(--gray-light);
-	border-radius: 2px;
+	border: 0.1rem solid var(--gray-light);
+	border-radius: 4px;
 	padding: 0.5rem;
-	transition: 500ms border ease;
+	transition: 300ms border ease;
 
 	&:focus {
-		border: 1px solid var(--gray-dark);
+		border: 0.1rem solid var(--red);
 	}
 }
