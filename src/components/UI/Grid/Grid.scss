@@ -1,0 +1,32 @@
+.grid {
+	display: grid;
+
+	&-gap-1 {
+		gap: 1rem;
+	}
+
+	&-gap-2 {
+		gap: 2rem;
+		align-items: center;
+	}
+
+	&-gap-3 {
+		gap: 2rem;
+	}
+
+	&-gap-4 {
+		gap: 2rem;
+	}
+
+	&-cols-2 {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	&-cols-3 {
+		grid-template-columns: repeat(3, 1fr);
+	}
+
+	&-cols-4 {
+		grid-template-columns: repeat(4, 1fr);
+	}
+}
