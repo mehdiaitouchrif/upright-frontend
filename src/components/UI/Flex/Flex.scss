@@ -25,4 +25,11 @@
 	&-align-bottom {
 		align-items: flex-end;
 	}
+
+	&-direction-column {
+		flex-direction: column;
+	}
+	&-direction-row {
+		flex-direction: row;
+	}
 }
