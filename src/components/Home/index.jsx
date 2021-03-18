@@ -14,7 +14,6 @@ function Home() {
 			<h1>Home</h1>
 
 			<Link to='/login'>Login</Link>
-			<Link to='/signup'>Sign Up</Link>
 			<button onClick={logoutHandler}>Logout</button>
 		</main>
 	)
