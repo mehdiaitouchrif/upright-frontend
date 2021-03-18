@@ -1,0 +1,35 @@
+.auth {
+	padding: 2rem;
+	height: 100vh;
+	background-color: #f9f9f9;
+
+	&__content {
+		display: flex;
+		height: 100%;
+		align-items: center;
+	}
+
+	&__side {
+		align-self: flex-start;
+		margin-top: 3rem;
+	}
+
+	&__close {
+		font-size: 2.5rem;
+		font-weight: 500;
+		cursor: pointer;
+	}
+
+	&__logo {
+		font-size: 3rem;
+		line-height: 1.6;
+		font-weight: 600;
+		color: var(--red);
+	}
+
+	&__heading {
+		font-size: 1.5rem;
+		line-height: 1.4;
+		font-weight: 500;
+	}
+}

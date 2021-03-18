@@ -13,12 +13,9 @@ import Alert from '../UI/Alert'
 import Flex from '../UI/Flex'
 import Spinner from '../UI/Spinner'
 import './Auth.scss'
+import SignUp from './SignUp'
 
-// Alert, Modal
-// Refactor Login, Sign Up | Create Password reset
-// Post, User, Profile
-
-function Login({ history, changeScreen }) {
+function Login({ history }) {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
@@ -31,7 +28,12 @@ function Login({ history, changeScreen }) {
 		e.preventDefault()
 
 		console.log({ email, password })
-		dispatch(login({ email, password }))
+		dispatch(login({ email, username: email, password }))
+	}
+
+	const [isSignUp, setIsSignUp] = useState(false)
+	function showModal() {
+		setIsSignUp(!isSignUp)
 	}
 
 	useEffect(() => {
@@ -56,9 +58,9 @@ function Login({ history, changeScreen }) {
 								<TextInput
 									value={email}
 									onChange={(e) => setEmail(e.target.value)}
-									placeholder='Email'
+									placeholder='Email or username'
 									name='email'
-									type='email'
+									type='text'
 								/>
 							</FormGroup>
 
@@ -87,13 +89,14 @@ function Login({ history, changeScreen }) {
 								Forgot password?{' '}
 							</Link>
 							<hr className='my-1' />
-							<Button bg='blue' className='w-full rounded'>
+							<Button bg='blue' onClick={showModal} className='w-full rounded'>
 								Sign up
 							</Button>
 						</Flex>
 					</Card>
 				</Grid>
 			</Container>
+			{isSignUp && <SignUp showModal={showModal} />}
 		</div>
 	)
 }
