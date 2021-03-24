@@ -7,6 +7,9 @@ import {
 	SIGN_UP_REQUEST,
 	SIGN_UP_SUCCESS,
 	SIGN_UP_FAIL,
+	CURRENT_USER_REQUEST,
+	CURRENT_USER_SUCCESS,
+	CURRENT_USER_FAIL,
 } from '../constants/authConstants'
 
 // Set axios config
@@ -76,4 +79,36 @@ export const logout = () => async (dispatch) => {
 	dispatch({
 		type: LOGOUT,
 	})
+}
+
+export const getCurrentUser = () => async (dispatch, getState) => {
+	try {
+		dispatch({ type: CURRENT_USER_REQUEST })
+
+		const {
+			userLogin: { userInfo },
+		} = getState()
+
+		config = {
+			headers: { ...config.headers, Authorization: `Bearer ${userInfo.token}` },
+		}
+
+		const { data } = await axios.get(
+			`${process.env.REACT_APP_BACKEND_API_URL}/api/v1/auth/me`,
+			config
+		)
+
+		dispatch({
+			type: CURRENT_USER_SUCCESS,
+			payload: data.data,
+		})
+	} catch (error) {
+		dispatch({
+			type: CURRENT_USER_FAIL,
+			payload:
+				error.response && error.response.data.error
+					? error.response.data.error
+					: error.message,
+		})
+	}
 }
