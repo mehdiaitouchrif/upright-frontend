@@ -29,4 +29,8 @@
 	&-cols-4 {
 		grid-template-columns: repeat(4, 1fr);
 	}
+
+	&-cols-5 {
+		grid-template-columns: repeat(5, 1fr);
+	}
 }

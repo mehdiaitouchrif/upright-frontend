@@ -63,7 +63,6 @@ function Login({ history }) {
 									type='text'
 								/>
 							</FormGroup>
-
 							<FormGroup>
 								<TextInput
 									value={password}
@@ -89,7 +88,12 @@ function Login({ history }) {
 								Forgot password?{' '}
 							</Link>
 							<hr className='my-1' />
-							<Button bg='blue' onClick={showModal} className='w-full rounded'>
+							<Button
+								type='button'
+								bg='blue'
+								onClick={showModal}
+								className='w-full rounded'
+							>
 								Sign up
 							</Button>
 						</Flex>

@@ -8,9 +8,8 @@ function TextArea({ value, className, onChange, name, placeholder }) {
 			onChange={onChange}
 			placeholder={placeholder}
 			name={name}
-		>
-			{value}
-		</textarea>
+			value={value}
+		/>
 	)
 }
 
