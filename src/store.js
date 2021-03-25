@@ -17,6 +17,11 @@ import {
 	postLikeReducer,
 	postShareReducer,
 } from './reducers/postReducers'
+import {
+	userFollowReducer,
+	userSuggestionsReducer,
+	userProfileReducer,
+} from './reducers/userReducers'
 const reducer = combineReducers({
 	userLogin: loginReducer,
 	userSignUp: signUpReducer,
@@ -28,6 +33,9 @@ const reducer = combineReducers({
 	postDelete: postDeleteReducer,
 	postLike: postLikeReducer,
 	postShare: postShareReducer,
+	userFollow: userFollowReducer,
+	userSuggestions: userSuggestionsReducer,
+	userProfile: userProfileReducer,
 })
 
 const userInfoFromLocalStorage = localStorage.getItem('userInfo')
