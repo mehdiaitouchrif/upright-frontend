@@ -1,9 +1,12 @@
 import './Container.scss'
 import PropTypes from 'prop-types'
 
-function Container({ size, children, className }) {
+function Container({ size, children, className, customSize }) {
 	return (
-		<div className={`container container--${size} ${className}`}>
+		<div
+			style={{ maxWidth: customSize && customSize }}
+			className={`container container--${size} ${className}`}
+		>
 			{children}
 		</div>
 	)
@@ -11,6 +14,7 @@ function Container({ size, children, className }) {
 
 Container.propTypes = {
 	size: PropTypes.string,
+	customSize: PropTypes.number,
 	className: PropTypes.string,
 }
 
