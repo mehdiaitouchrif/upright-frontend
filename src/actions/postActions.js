@@ -6,12 +6,17 @@ import {
 	DELETE_POST_FAIL,
 	DELETE_POST_REQUEST,
 	DELETE_POST_SUCCESS,
+	LIKED_POSTS_FAIL,
+	LIKED_POSTS_REQUEST,
+	LIKED_POSTS_SUCCESS,
 	LIKE_POST_FAIL,
 	LIKE_POST_REQUEST,
 	LIKE_POST_SUCCESS,
 	POPULATE_FEED_FAIL,
 	POPULATE_FEED_REQUEST,
 	POPULATE_FEED_SUCCESS,
+	SHARED_POSTS_REQUEST,
+	SHARED_POSTS_SUCCESS,
 	SHARE_POST_FAIL,
 	SHARE_POST_REQUEST,
 	SHARE_POST_SUCCESS,
@@ -245,6 +250,66 @@ export const sharePost = (id, text) => async (dispatch, getState) => {
 		dispatch({
 			type: SHARE_POST_SUCCESS,
 			payload: data.success,
+		})
+	} catch (error) {
+		dispatch({
+			type: SHARE_POST_FAIL,
+			payload:
+				error.response && error.response.data.error
+					? error.response.data.error
+					: error.message,
+		})
+	}
+}
+
+export const listLikedPosts = (userId) => async (dispatch, getState) => {
+	try {
+		dispatch({ type: LIKED_POSTS_REQUEST })
+
+		const {
+			userLogin: { userInfo },
+		} = getState()
+
+		config = {
+			headers: { ...config.headers, Authorization: `Bearer ${userInfo.token}` },
+		}
+
+		const { data } = await axios.get(
+			`/${process.env.REACT_APP_BACKEND_API_URL}/api/v1/posts/${userId}/likes`
+		)
+		dispatch({
+			type: LIKED_POSTS_SUCCESS,
+			payload: data.data,
+		})
+	} catch (error) {
+		dispatch({
+			type: LIKED_POSTS_FAIL,
+			payload:
+				error.response && error.response.data.error
+					? error.response.data.error
+					: error.message,
+		})
+	}
+}
+
+export const listSharedPosts = (userId) => async (dispatch, getState) => {
+	try {
+		dispatch({ type: SHARED_POSTS_REQUEST })
+
+		const {
+			userLogin: { userInfo },
+		} = getState()
+
+		config = {
+			headers: { ...config.headers, Authorization: `Bearer ${userInfo.token}` },
+		}
+
+		const { data } = await axios.get(
+			`/${process.env.REACT_APP_BACKEND_API_URL}/api/v1/posts/${userId}/shares`
+		)
+		dispatch({
+			type: SHARED_POSTS_SUCCESS,
+			payload: data.data,
 		})
 	} catch (error) {
 		dispatch({
