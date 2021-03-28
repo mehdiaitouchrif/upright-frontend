@@ -7,6 +7,11 @@ import {
 	loginReducer,
 	signUpReducer,
 	currentUserReducer,
+	passwordChangeReducer,
+	resetRequestReducer,
+	passwordResetRedcuer,
+	confirmationSendingReducer,
+	emailConfirmationReducer,
 } from './reducers/authReducers'
 import {
 	createPostReducer,
@@ -16,16 +21,25 @@ import {
 	postDeleteReducer,
 	postLikeReducer,
 	postShareReducer,
+	likedPostsReducer,
+	sharedPostsReducer,
 } from './reducers/postReducers'
 import {
 	userFollowReducer,
 	userSuggestionsReducer,
 	userProfileReducer,
+	userUpdateReducer,
+	userDeleteReducer,
 } from './reducers/userReducers'
 const reducer = combineReducers({
 	userLogin: loginReducer,
 	userSignUp: signUpReducer,
 	currentUser: currentUserReducer,
+	passwordChange: passwordChangeReducer,
+	confirmationSending: confirmationSendingReducer,
+	emailConfirmation: emailConfirmationReducer,
+	resetRequest: resetRequestReducer,
+	passwordReset: passwordResetRedcuer,
 	feedPosts: populateFeedReducer,
 	userPosts: userPostsReducer,
 	postCreation: createPostReducer,
@@ -33,9 +47,13 @@ const reducer = combineReducers({
 	postDelete: postDeleteReducer,
 	postLike: postLikeReducer,
 	postShare: postShareReducer,
+	likedPosts: likedPostsReducer,
+	sharedPostsReducer: sharedPostsReducer,
 	userFollow: userFollowReducer,
 	userSuggestions: userSuggestionsReducer,
 	userProfile: userProfileReducer,
+	userUpdate: userUpdateReducer,
+	userDelete: userDeleteReducer,
 })
 
 const userInfoFromLocalStorage = localStorage.getItem('userInfo')
