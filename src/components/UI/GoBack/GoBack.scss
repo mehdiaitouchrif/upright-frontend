@@ -1,0 +1,20 @@
+.back {
+	display: block;
+	padding: 0.75rem;
+	width: 100%;
+	font-weight: 600;
+	font-size: 1.1rem;
+	color: black !important;
+	border-bottom: 1px solid var(--gray-light);
+	position: sticky;
+	top: 0;
+	background-color: white;
+
+	i {
+		color: var(--red);
+	}
+
+	&:hover {
+		text-decoration: none !important;
+	}
+}
