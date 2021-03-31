@@ -20,6 +20,12 @@ import {
 	SHARE_POST_REQUEST,
 	SHARE_POST_SUCCESS,
 	SHARE_POST_FAIL,
+	SHARED_POSTS_REQUEST,
+	SHARED_POSTS_SUCCESS,
+	SHARED_POSTS_FAIL,
+	LIKED_POSTS_REQUEST,
+	LIKED_POSTS_SUCCESS,
+	LIKED_POSTS_FAIL,
 } from '../constants/postConstants'
 
 export const createPostReducer = (state = {}, action) => {
@@ -161,6 +167,48 @@ export const postShareReducer = (state = {}, action) => {
 				success: action.payload,
 			}
 		case SHARE_POST_FAIL:
+			return {
+				loading: false,
+				error: action.payload,
+			}
+		default:
+			return state
+	}
+}
+
+export const likedPostsReducer = (state = {}, action) => {
+	switch (action.type) {
+		case LIKED_POSTS_REQUEST:
+			return {
+				loading: true,
+			}
+		case LIKED_POSTS_SUCCESS:
+			return {
+				loading: false,
+				posts: action.payload,
+			}
+		case LIKED_POSTS_FAIL:
+			return {
+				loading: false,
+				error: action.payload,
+			}
+		default:
+			return state
+	}
+}
+
+export const sharedPostsReducer = (state = {}, action) => {
+	switch (action.type) {
+		case SHARED_POSTS_REQUEST:
+			return {
+				loading: true,
+			}
+		case SHARED_POSTS_SUCCESS:
+			return {
+				loading: false,
+				posts: action.payload,
+			}
+		case SHARED_POSTS_FAIL:
 			return {
 				loading: false,
 				error: action.payload,

@@ -48,7 +48,7 @@ const reducer = combineReducers({
 	postLike: postLikeReducer,
 	postShare: postShareReducer,
 	likedPosts: likedPostsReducer,
-	sharedPostsReducer: sharedPostsReducer,
+	sharedPosts: sharedPostsReducer,
 	userFollow: userFollowReducer,
 	userSuggestions: userSuggestionsReducer,
 	userProfile: userProfileReducer,
