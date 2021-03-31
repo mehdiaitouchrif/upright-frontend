@@ -131,7 +131,7 @@ export const updateUser = (updatedUser) => async (dispatch, getState) => {
 		}
 
 		const { data } = await axios.patch(
-			`/api/v1/users/${updateUser._id}/`,
+			`${process.env.REACT_APP_BACKEND_API_URL}/api/v1/users/${updatedUser._id}`,
 			updatedUser,
 			config
 		)
@@ -164,7 +164,10 @@ export const deleteUser = (id) => async (dispatch, getState) => {
 			},
 		}
 
-		const { data } = await axios.delete(`/api/v1/users/${id}/`, config)
+		const { data } = await axios.delete(
+			`${process.env.REACT_APP_BACKEND_API_URL}/api/v1/users/${id}/`,
+			config
+		)
 		dispatch({
 			type: USER_DELETE_SUCCESS,
 			payload: data.success,

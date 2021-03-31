@@ -15,6 +15,7 @@ import {
 	POPULATE_FEED_FAIL,
 	POPULATE_FEED_REQUEST,
 	POPULATE_FEED_SUCCESS,
+	SHARED_POSTS_FAIL,
 	SHARED_POSTS_REQUEST,
 	SHARED_POSTS_SUCCESS,
 	SHARE_POST_FAIL,
@@ -275,7 +276,8 @@ export const listLikedPosts = (userId) => async (dispatch, getState) => {
 		}
 
 		const { data } = await axios.get(
-			`/${process.env.REACT_APP_BACKEND_API_URL}/api/v1/posts/${userId}/likes`
+			`${process.env.REACT_APP_BACKEND_API_URL}/api/v1/posts/${userId}/likes`,
+			config
 		)
 		dispatch({
 			type: LIKED_POSTS_SUCCESS,
@@ -305,7 +307,8 @@ export const listSharedPosts = (userId) => async (dispatch, getState) => {
 		}
 
 		const { data } = await axios.get(
-			`/${process.env.REACT_APP_BACKEND_API_URL}/api/v1/posts/${userId}/shares`
+			`${process.env.REACT_APP_BACKEND_API_URL}/api/v1/posts/${userId}/shares`,
+			config
 		)
 		dispatch({
 			type: SHARED_POSTS_SUCCESS,
@@ -313,7 +316,7 @@ export const listSharedPosts = (userId) => async (dispatch, getState) => {
 		})
 	} catch (error) {
 		dispatch({
-			type: SHARE_POST_FAIL,
+			type: SHARED_POSTS_FAIL,
 			payload:
 				error.response && error.response.data.error
 					? error.response.data.error

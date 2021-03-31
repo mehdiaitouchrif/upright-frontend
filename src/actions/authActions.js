@@ -149,7 +149,7 @@ export const changePassword = (currentPassword, newPassword) => async (
 			config
 		)
 
-		dispatch({ type: CHANGE_PASSWORD_SUCCESS, payload: data })
+		dispatch({ type: CHANGE_PASSWORD_SUCCESS, payload: data.success })
 	} catch (error) {
 		dispatch({
 			type: CHANGE_PASSWORD_FAIL,
@@ -172,7 +172,7 @@ export const requestPasswordReset = (email) => async (dispatch) => {
 		}
 
 		const { data } = await axios.post(
-			'/api/v1/auth/requestpasswordreset',
+			`${process.env.REACT_APP_BACKEND_API_URL}/api/v1/auth/requestpasswordreset`,
 			{ email },
 			config
 		)
@@ -203,7 +203,7 @@ export const resetPassword = (newPassoword, token) => async (dispatch) => {
 		}
 
 		const { data } = await axios.patch(
-			`/api/v1/auth/resetpassword/${token}`,
+			`${process.env.REACT_APP_BACKEND_API_URL}/api/v1/auth/resetpassword/${token}`,
 			{ password: newPassoword },
 			config
 		)
@@ -236,7 +236,11 @@ export const sendConfirmationEmail = () => async (dispatch, getState) => {
 			},
 		}
 
-		await axios.post('/api/v1/auth/sendconfirmationemail', null, config)
+		await axios.post(
+			`${process.env.REACT_APP_BACKEND_API_URL}/api/v1/auth/sendconfirmationemail`,
+			null,
+			config
+		)
 
 		dispatch({
 			type: SEND_CONFIRMATION_EMAIL_SUCCESS,
@@ -258,7 +262,9 @@ export const confirmUserEmail = (token) => async (dispatch) => {
 			type: EMAIL_CONFIRMED_REQUEST,
 		})
 
-		const { data } = await axios.patch(`/api/v1/auth/confirmemail/${token}`)
+		const { data } = await axios.patch(
+			`${process.env.REACT_APP_BACKEND_API_URL}/api/v1/auth/confirmemail/${token}`
+		)
 
 		dispatch({
 			type: EMAIL_CONFIRMED_SUCCESS,
