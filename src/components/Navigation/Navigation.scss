@@ -1,0 +1,30 @@
+.nav {
+	&__content {
+		position: sticky;
+		top: 0.5rem;
+	}
+
+	button {
+		font-weight: 600;
+	}
+
+	&__item {
+		display: block;
+		width: 100%;
+		padding: 0.5rem;
+		transition: 300ms ease-in;
+		font-size: 1.2rem !important;
+		font-weight: 500;
+
+		&.active {
+			i {
+				color: var(--red);
+			}
+		}
+
+		&:hover {
+			background: #f4f4f4;
+			text-decoration: none !important;
+		}
+	}
+}

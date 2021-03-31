@@ -11,6 +11,7 @@ import Spinner from '../UI/Spinner'
 import './Auth.scss'
 import Card from '../UI/Card'
 import Container from '../UI/Container'
+import PropTypes from 'prop-types'
 
 function SignUp({ showModal }) {
 	const [firstName, setFirstName] = useState('')
@@ -63,6 +64,7 @@ function SignUp({ showModal }) {
 								onChange={(e) => setLastName(e.target.value)}
 							/>
 						</FormGroup>
+
 						{error && error.username && (
 							<Alert bg='danger'>{error.username} </Alert>
 						)}
@@ -107,6 +109,10 @@ function SignUp({ showModal }) {
 			</Container>
 		</Modal>
 	)
+}
+
+SignUp.propTypes = {
+	showModal: PropTypes.bool,
 }
 
 export default SignUp

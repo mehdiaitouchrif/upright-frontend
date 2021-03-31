@@ -45,7 +45,7 @@ function Post({ post, user, showFooter }) {
 			{isEdit && <Edit post={post} showModal={showEditModal} />}
 			<Flex>
 				<div className='post__user'>
-					<Link to={`/${post.user.username}`}>
+					<Link to={`/@${post.user.username}`}>
 						<img
 							src={post.user.profilePhoto}
 							alt={`${post.user.username} avatar`}
@@ -54,7 +54,7 @@ function Post({ post, user, showFooter }) {
 				</div>
 				<div className='post__details'>
 					<p>
-						<Link to={`/${post.user.username}`}>
+						<Link to={`/@${post.user.username}`}>
 							{post.user.firstName} {post.user.lastName}
 						</Link>
 						<span>@{post.user.username}</span>

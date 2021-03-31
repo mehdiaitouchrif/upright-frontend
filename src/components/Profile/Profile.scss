@@ -1,0 +1,70 @@
+.profile {
+	&__content {
+		border: 1px solid var(--gray-light);
+		min-height: 100vh;
+	}
+
+	&__head {
+		&--cover {
+			background: #c4cfd6;
+			height: 10rem;
+		}
+	}
+
+	&__showcase {
+		&--head {
+			height: 8rem;
+			width: 8rem;
+			margin-top: -4rem;
+			border-radius: 50%;
+			border: 4px solid white;
+		}
+	}
+
+	&__body {
+		padding: 0 1.5rem;
+
+		&--name,
+		&--username {
+			line-height: 1.2;
+		}
+
+		&--name {
+			font-size: 1.1rem;
+			font-weight: 600;
+		}
+
+		&--username {
+			color: #777;
+			font-weight: 500;
+		}
+
+		&--joined {
+			color: #666;
+			& > * {
+				margin-right: 0.25rem;
+			}
+		}
+	}
+
+	&__activity {
+		flex-basis: 100%;
+		padding: 0.75rem;
+		cursor: pointer;
+		transition: 1s all ease;
+		border-bottom: 2px solid white;
+		font-weight: 600;
+		color: #666;
+		text-align: center;
+
+		&.active {
+			border-bottom: 0.1rem solid var(--red);
+			color: var(--red);
+		}
+
+		&:hover {
+			color: var(--red);
+			background-color: rgb(252, 231, 231);
+		}
+	}
+}

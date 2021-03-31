@@ -1,39 +1,35 @@
-import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { logout, getCurrentUser } from '../../actions/authActions'
+import { getCurrentUser } from '../../actions/authActions'
 import Posts from '../Posts'
 import Create from '../Posts/Create'
-import Container from '../UI/Container'
 import { useEffect } from 'react'
+import './Home.scss'
+import AppContainer from '../AppContainer'
 
-function Home({ history }) {
-	const dispatch = useDispatch()
-
-	function logoutHandler() {
-		dispatch(logout())
-	}
-
-	const userLogin = useSelector((state) => state.userLogin)
-	const { userInfo } = userLogin
+function Home() {
+	// Current user state
 	const currentUser = useSelector((state) => state.currentUser)
 	const { user } = currentUser
+
+	// Dispatch
+	const dispatch = useDispatch()
 
 	useEffect(() => {
 		if (!user) {
 			dispatch(getCurrentUser())
 		}
-		if (!userInfo) {
-			history.push('/login')
-		}
-	}, [dispatch, user, history, userInfo])
+	}, [dispatch, user])
 
 	return (
-		<Container size='md'>
-			<Create user={user} />
-			<Posts user={user} />
-			<Link to='/login'>Login</Link>
-			<button onClick={logoutHandler}>Logout</button>
-		</Container>
+		<main className='home'>
+			<AppContainer>
+				<div className='home__main'>
+					<div className='home__head'>Home</div>
+					<Create user={user} />
+					<Posts user={user} />
+				</div>
+			</AppContainer>
+		</main>
 	)
 }
 

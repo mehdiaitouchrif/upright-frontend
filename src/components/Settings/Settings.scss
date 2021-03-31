@@ -1,0 +1,10 @@
+.settings {
+	&__content {
+		border: 1px solid var(--gray-light);
+	}
+
+	&__form {
+		margin-bottom: 1rem;
+		border-bottom: 0.1rem solid var(--gray-light);
+	}
+}

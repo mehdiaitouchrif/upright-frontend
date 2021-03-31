@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../../actions/authActions'
 import { Link } from 'react-router-dom'
-import PropTypes from 'prop-types'
 import Container from '../UI/Container'
 import TextInput from '../UI/FormComponents/TextInput'
 import Button from '../UI/Button'
@@ -103,10 +102,6 @@ function Login({ history }) {
 			{isSignUp && <SignUp showModal={showModal} />}
 		</div>
 	)
-}
-
-Login.propTypes = {
-	history: PropTypes.object.isRequired,
 }
 
 export default Login

@@ -6,6 +6,7 @@ import Post from './Post'
 import Spinner from '../UI/Spinner'
 import Alert from '../UI/Alert'
 import './Posts.scss'
+import Flex from '../UI/Flex'
 
 function Posts({ user }) {
 	const dispatch = useDispatch()
@@ -31,7 +32,11 @@ function Posts({ user }) {
 
 	return (
 		<div className='posts'>
-			{loading && <Spinner />}
+			{loading && (
+				<Flex justify='center' className='mb-2'>
+					<Spinner />
+				</Flex>
+			)}
 			{error && <Alert bg='danger'>{error}</Alert>}
 			{posts &&
 				posts.map((post) => <Post key={post._id} user={user} post={post} />)}
