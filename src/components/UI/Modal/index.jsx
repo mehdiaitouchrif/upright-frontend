@@ -1,9 +1,22 @@
+import Card from '../Card'
+import Flex from '../Flex'
+import Container from '../Container'
 import './Modal.scss'
 
-function Modal({ children, className }) {
+function Modal({ children, className, showModal, title, customSize }) {
 	return (
 		<div className={`modal ${className}`}>
-			<div className='modal__content'>{children}</div>
+			<Container customSize={customSize}>
+				<Card className='modal__content'>
+					<Flex className='modal__head' justify='space-between' align='center'>
+						<h2 className='secondary-heading'>{title}</h2>
+						<p className='auth__close' onClick={showModal}>
+							&times;
+						</p>
+					</Flex>
+					<div className='modal__body'>{children}</div>
+				</Card>
+			</Container>
 		</div>
 	)
 }

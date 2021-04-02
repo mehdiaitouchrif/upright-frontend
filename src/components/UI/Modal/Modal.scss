@@ -9,10 +9,14 @@
 	background-color: rgba(0, 0, 0, 0.5);
 
 	&__content {
-		margin: 5% auto;
+		margin: 10% auto;
 		width: 100%;
 		animation-name: modalopen;
 		animation-duration: 400ms;
+	}
+
+	&__head {
+		border-bottom: 0.1rem solid var(--gray-light);
 	}
 
 	&__close {
