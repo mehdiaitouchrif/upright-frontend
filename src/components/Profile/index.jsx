@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getUser } from '../../actions/userActions'
+import { getUser, followUser } from '../../actions/userActions'
 import {
 	getUserPosts,
 	listLikedPosts,
@@ -43,6 +43,13 @@ function Profile({ match, history }) {
 	// Dispatch
 	const dispatch = useDispatch()
 
+	const [follow, setFollow] = useState('Follow')
+	// Follow user
+	function followUserHandler(userId) {
+		dispatch(followUser(userId))
+		setFollow((prev) => (prev === 'Follow' ? 'Unfollow' : 'Follow'))
+	}
+
 	// Switch tabs
 	function switchTabs(str) {
 		if (str === 'shares') {
@@ -59,11 +66,11 @@ function Profile({ match, history }) {
 			history.push('/login')
 		} else {
 			dispatch(getUser(match.params.username))
-			dispatch(getUserPosts())
+			dispatch(getUserPosts(userInfo.data._id))
 			dispatch(listSharedPosts(userInfo.data._id))
 			dispatch(listLikedPosts(userInfo.data._id))
 		}
-	}, [dispatch, match, userInfo, history])
+	}, [userInfo, history, dispatch, match])
 
 	return (
 		<div className='profile'>
@@ -108,8 +115,13 @@ function Profile({ match, history }) {
 											</Button>
 										</Link>
 									) : (
-										<Button type='button' bg='red' className='rounded'>
-											Follow
+										<Button
+											onClick={() => followUserHandler(user._id)}
+											type='button'
+											bg='red'
+											className='rounded'
+										>
+											{follow}
 										</Button>
 									)}
 								</div>
@@ -154,7 +166,9 @@ function Profile({ match, history }) {
 							</Flex>
 						</div>
 						{activePosts &&
-							activePosts.map((post) => <Post key={post._id} post={post} />)}
+							activePosts.map((post) => (
+								<Post key={post._id} user={user} post={post} />
+							))}
 					</div>
 				)}
 			</AppContainer>
