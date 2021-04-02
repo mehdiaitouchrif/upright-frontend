@@ -161,7 +161,7 @@ export const changePassword = (currentPassword, newPassword) => async (
 	}
 }
 
-export const requestPasswordReset = (email) => async (dispatch) => {
+export const requestPasswordReset = (username) => async (dispatch) => {
 	try {
 		dispatch({ type: RESET_CODE_REQUEST })
 
@@ -173,7 +173,7 @@ export const requestPasswordReset = (email) => async (dispatch) => {
 
 		const { data } = await axios.post(
 			`${process.env.REACT_APP_BACKEND_API_URL}/api/v1/auth/requestpasswordreset`,
-			{ email },
+			{ username },
 			config
 		)
 
