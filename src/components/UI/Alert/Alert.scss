@@ -1,9 +1,18 @@
 .alert {
-	padding: 0.5rem 1rem;
 	border-radius: 4px;
 	color: var(--red);
-	border: 1px solid var(--gray-light);
 	font-weight: 500;
+
+	& > div {
+		padding: 0.25rem 1rem;
+	}
+
+	&__close {
+		font-size: 1.5rem;
+		font-weight: 600;
+		cursor: pointer;
+		margin-left: 1rem;
+	}
 
 	&-success {
 		background-color: var(--green);
