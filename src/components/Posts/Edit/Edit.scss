@@ -1,0 +1,19 @@
+.edit {
+	&__input {
+		margin-top: 0.5rem;
+		font-family: inherit;
+		border: none !important;
+		border-bottom: 0.1rem solid var(--gray-light) !important;
+		transition: 300ms ease all;
+		&:focus {
+			border-bottom: 0.1rem solid var(--red) !important;
+		}
+	}
+	&__image {
+		width: 100%;
+
+		img {
+			width: 100%;
+		}
+	}
+}
