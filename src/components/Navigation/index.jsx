@@ -2,10 +2,17 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Button from '../UI/Button'
 import Flex from '../UI/Flex'
+import Modal from '../UI/Modal'
+import Create from '../Posts/Create'
 import './Navigation.scss'
 
 function Navigation({ logout, user }) {
 	const [active, setActive] = useState('home')
+
+	const [isCreate, setIsCreate] = useState(false)
+	function showModal() {
+		setIsCreate(!isCreate)
+	}
 
 	return (
 		<div className='nav'>
@@ -41,7 +48,12 @@ function Navigation({ logout, user }) {
 					</Flex>
 				</Link>
 				<div className='mt-2'>
-					<Button type='button' bg='blue' className='rounded'>
+					<Button
+						type='button'
+						bg='blue'
+						className='rounded'
+						onClick={showModal}
+					>
 						<Flex align='center'>
 							<i className='fas fa-plus mr-1'></i>
 							<p>New Post</p>
@@ -57,6 +69,11 @@ function Navigation({ logout, user }) {
 					</Button>
 				</div>
 			</div>
+			{isCreate && (
+				<Modal showModal={showModal} customSize={700} title='Create post'>
+					<Create />
+				</Modal>
+			)}
 		</div>
 	)
 }

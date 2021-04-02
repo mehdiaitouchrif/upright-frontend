@@ -99,7 +99,9 @@ function Login({ history }) {
 					</Card>
 				</Grid>
 			</Container>
-			{isSignUp && <SignUp showModal={showModal} />}
+			{isSignUp && (
+				<SignUp title='Sign up' customSize={450} showModal={showModal} />
+			)}
 		</div>
 	)
 }

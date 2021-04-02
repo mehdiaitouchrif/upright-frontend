@@ -9,11 +9,9 @@ import Alert from '../UI/Alert'
 import Flex from '../UI/Flex'
 import Spinner from '../UI/Spinner'
 import './Auth.scss'
-import Card from '../UI/Card'
-import Container from '../UI/Container'
 import PropTypes from 'prop-types'
 
-function SignUp({ showModal }) {
+function SignUp({ showModal, title, customSize }) {
 	const [firstName, setFirstName] = useState('')
 	const [lastName, setLastName] = useState('')
 	const [email, setEmail] = useState('')
@@ -32,81 +30,71 @@ function SignUp({ showModal }) {
 	}
 
 	return (
-		<Modal>
-			<Container size='sm'>
-				<Card>
-					<Flex justify='space-between' align='center'>
-						<h1 className='primary-heading'>Sign up</h1>
-						<p className='auth__close' onClick={showModal}>
-							&times;
-						</p>
-					</Flex>
-					<form onSubmit={handleSignUp}>
-						{error && error.firstName && (
-							<Alert bg='danger'>{error.firstName} </Alert>
-						)}
-						<FormGroup>
-							<TextInput
-								type='text'
-								value={firstName}
-								placeholder='First Name'
-								onChange={(e) => setFirstName(e.target.value)}
-							/>
-						</FormGroup>
-						{error && error.lastName && (
-							<Alert bg='danger'>{error.lastName} </Alert>
-						)}
-						<FormGroup>
-							<TextInput
-								type='text'
-								value={lastName}
-								placeholder='Last Name'
-								onChange={(e) => setLastName(e.target.value)}
-							/>
-						</FormGroup>
+		<Modal title={title} customSize={customSize} showModal={showModal}>
+			<form onSubmit={handleSignUp}>
+				{error && error.firstName && (
+					<Alert bg='danger'>{error.firstName} </Alert>
+				)}
+				<FormGroup>
+					<TextInput
+						type='text'
+						value={firstName}
+						placeholder='First Name'
+						onChange={(e) => setFirstName(e.target.value)}
+					/>
+				</FormGroup>
+				{error && error.lastName && (
+					<Alert bg='danger'>{error.lastName} </Alert>
+				)}
+				<FormGroup>
+					<TextInput
+						type='text'
+						value={lastName}
+						placeholder='Last Name'
+						onChange={(e) => setLastName(e.target.value)}
+					/>
+				</FormGroup>
 
-						{error && error.username && (
-							<Alert bg='danger'>{error.username} </Alert>
-						)}
-						<FormGroup>
-							<TextInput
-								type='text'
-								value={username}
-								placeholder='Username'
-								onChange={(e) => setUsername(e.target.value)}
-							/>
-						</FormGroup>
-						{error && error.email && <Alert bg='danger'>{error.email} </Alert>}
-						<FormGroup>
-							<TextInput
-								type='email'
-								value={email}
-								placeholder='Email'
-								onChange={(e) => setEmail(e.target.value)}
-							/>
-						</FormGroup>
-						{error && error.password && (
-							<Alert bg='danger'>{error.password} </Alert>
-						)}
-						<FormGroup>
-							<TextInput
-								type='password'
-								value={password}
-								placeholder='Password'
-								onChange={(e) => setPassword(e.target.value)}
-							/>
-						</FormGroup>
-						<Button type='submit' bg='red' className='w-full rounded mb-1'>
-							Sign up
-						</Button>
-					</form>
-					{loading && (
-						<Flex justify='center'>
-							<Spinner className='mb-1' />
-						</Flex>
-					)}
-				</Card>
-			</Container>
+				{error && error.username && (
+					<Alert bg='danger'>{error.username} </Alert>
+				)}
+				<FormGroup>
+					<TextInput
+						type='text'
+						value={username}
+						placeholder='Username'
+						onChange={(e) => setUsername(e.target.value)}
+					/>
+				</FormGroup>
+				{error && error.email && <Alert bg='danger'>{error.email} </Alert>}
+				<FormGroup>
+					<TextInput
+						type='email'
+						value={email}
+						placeholder='Email'
+						onChange={(e) => setEmail(e.target.value)}
+					/>
+				</FormGroup>
+				{error && error.password && (
+					<Alert bg='danger'>{error.password} </Alert>
+				)}
+				<FormGroup>
+					<TextInput
+						type='password'
+						value={password}
+						placeholder='Password'
+						onChange={(e) => setPassword(e.target.value)}
+					/>
+				</FormGroup>
+				<Button type='submit' bg='red' className='w-full rounded mb-1'>
+					Sign up
+				</Button>
+			</form>
+			{loading && (
+				<Flex justify='center'>
+					<Spinner className='mb-1' />
+				</Flex>
+			)}
 		</Modal>
 	)
 }
