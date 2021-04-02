@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import Button from '../UI/Button'
 import Flex from '../UI/Flex'
 import Modal from '../UI/Modal'
@@ -7,9 +7,11 @@ import Create from '../Posts/Create'
 import './Navigation.scss'
 
 function Navigation({ logout, user }) {
-	const [active, setActive] = useState('home')
-
 	const [isCreate, setIsCreate] = useState(false)
+	const {
+		location: { pathname },
+	} = useHistory()
+
 	function showModal() {
 		setIsCreate(!isCreate)
 	}
@@ -17,11 +19,7 @@ function Navigation({ logout, user }) {
 	return (
 		<div className='nav'>
 			<div className='nav__content'>
-				<Link
-					to='/'
-					className={`nav__item ${active === 'home' && 'active'}`}
-					onClick={() => setActive('home')}
-				>
+				<Link to='/' className={`nav__item ${pathname === '/' && 'active'}`}>
 					<Flex align='center'>
 						<i className='fas fa-home mr-1'></i>
 						<p>Home</p>
@@ -29,8 +27,11 @@ function Navigation({ logout, user }) {
 				</Link>
 				<Link
 					to={user && `/@${user.username}`}
-					className={`nav__item ${active === 'profile' && 'active'}`}
-					onClick={() => setActive('profile')}
+					className={`nav__item ${
+						!pathname.endsWith('settings') &&
+						pathname.startsWith('/@') &&
+						'active'
+					}`}
 				>
 					<Flex align='center'>
 						<i className='fas fa-user mr-1'></i>
@@ -39,8 +40,7 @@ function Navigation({ logout, user }) {
 				</Link>
 				<Link
 					to={user && `/@${user.username}/settings`}
-					className={`nav__item ${active === 'settings' && 'active'}`}
-					onClick={() => setActive('settings')}
+					className={`nav__item ${pathname.endsWith('settings') && 'active'}`}
 				>
 					<Flex align='center'>
 						<i className='fas fa-cog mr-1'></i>
