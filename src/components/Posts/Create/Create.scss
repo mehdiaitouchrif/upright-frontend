@@ -27,17 +27,31 @@
 		}
 	}
 
-	&__upload {
-		img {
-			width: 1.5rem;
-			height: 1.5rem;
-			cursor: pointer;
-			transition: 500ms all ease;
+	&__chosen {
+		width: 150px;
+		border: 1px solid var(--gray-light);
 
-			&:hover {
-				transform: scale(1.05);
-			}
+		img {
+			width: 100%;
 		}
+	}
+
+	&__emoji,
+	&__images {
+		font-size: 1.5rem;
+		margin-left: 0.5rem;
+		color: #2aa6f2;
+		cursor: pointer;
+		transition: 500ms all ease;
+		&:first-child {
+			margin-top: 5px;
+		}
+
+		&:hover {
+			transform: scale(1.05);
+		}
+	}
+	&__upload {
 		input {
 			display: none;
 		}
