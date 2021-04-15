@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { getSuggestions, followUser } from '../../actions/userActions'
+import SearchBox from '../SearchBox'
 import Flex from '../UI/Flex'
 import Spinner from '../UI/Spinner'
 import './Aside.scss'
@@ -28,7 +29,8 @@ function Aside() {
 
 	return (
 		<div className='aside'>
-			{user ? (
+			<SearchBox />
+			{/* {user ? (
 				<Link to={`/@${user.username}`}>
 					<Flex align='center' className='aside__profile'>
 						<img src={user.profilePhoto} alt='Profile' />
@@ -44,7 +46,7 @@ function Aside() {
 				<Flex justify='center'>
 					<Spinner />
 				</Flex>
-			)}
+			)} */}
 
 			<p className='lead'>Suggestions for you</p>
 			{suggestions &&
