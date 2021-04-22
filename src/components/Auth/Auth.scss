@@ -3,21 +3,30 @@
 	height: 100vh;
 	background-color: #f9f9f9;
 
+	@media (max-width: 640px) {
+		padding: 0.5rem;
+		width: 100% !important;
+	}
+
 	&__content {
 		display: flex;
 		height: 100%;
+		width: 100%;
 		align-items: center;
+		justify-content: center;
+
+		@media (max-width: 640px) {
+			display: contents;
+		}
 	}
 
 	&__side {
 		align-self: flex-start;
 		margin-top: 3rem;
-	}
 
-	&__close {
-		font-size: 2.5rem;
-		font-weight: 500;
-		cursor: pointer;
+		@media (max-width: 768px) {
+			margin-top: 0;
+		}
 	}
 
 	&__logo {
@@ -25,11 +34,20 @@
 		line-height: 1.6;
 		font-weight: 600;
 		color: var(--red);
+
+		@media (max-width: 640px) {
+			font-size: 2.5rem;
+			margin: 5rem 0 0 1rem;
+		}
 	}
 
 	&__heading {
 		font-size: 1.5rem;
 		line-height: 1.4;
 		font-weight: 500;
+
+		@media (max-width: 640px) {
+			display: none;
+		}
 	}
 }

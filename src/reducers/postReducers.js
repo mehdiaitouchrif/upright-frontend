@@ -80,7 +80,8 @@ export const populateFeedReducer = (state = { posts: [] }, action) => {
 		case POPULATE_FEED_SUCCESS:
 			return {
 				loading: false,
-				posts: action.payload,
+				posts: action.payload.data,
+				pagination: action.payload.pagination,
 			}
 		case POPULATE_FEED_FAIL:
 			return {

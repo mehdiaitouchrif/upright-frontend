@@ -6,11 +6,8 @@ import TextArea from '../../UI/FormComponents/TextArea'
 import './Share.scss'
 import Post from '../Post'
 import Button from '../../UI/Button'
-import Flex from '../../UI/Flex'
-import Card from '../../UI/Card'
-import Container from '../../UI/Container'
 
-function Share({ post, user, showModal }) {
+function Share({ post, user, showModal, customSize, title }) {
 	const [text, setText] = useState(null)
 
 	const dispatch = useDispatch()
@@ -20,31 +17,27 @@ function Share({ post, user, showModal }) {
 	}
 
 	return (
-		<Modal className='share'>
-			<Container size='md'>
-				<Card>
-					<Flex justify='space-between' align='center'>
-						<p className='modal__close' onClick={showModal}>
-							&times;
-						</p>
-					</Flex>
-					<TextArea
-						placeholder='Want to say something?'
-						onChange={(e) => setText(e.target.value)}
-						value={text}
-					/>
+		<Modal
+			className='share'
+			showModal={showModal}
+			customSize={customSize}
+			title={title}
+		>
+			<TextArea
+				placeholder='Want to say something?'
+				onChange={(e) => setText(e.target.value)}
+				value={text}
+			/>
 
-					<Post post={post} user={user} showFooter={false} />
-					<Button
-						onClick={() => sharePostHandler(post._id)}
-						type='button'
-						bg='blue'
-						className='rounded'
-					>
-						Re-Post
-					</Button>
-				</Card>
-			</Container>
+			<Post post={post} user={user} showFooter={false} />
+			<Button
+				onClick={() => sharePostHandler(post._id)}
+				type='button'
+				bg='blue'
+				className='rounded'
+			>
+				Re-Post
+			</Button>
 		</Modal>
 	)
 }

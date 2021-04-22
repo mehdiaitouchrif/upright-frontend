@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
@@ -12,6 +12,12 @@ import PostFooter from './PostFooter'
 
 function Post({ post, user, showFooter }) {
 	const dispatch = useDispatch()
+
+	const options = useRef(null)
+
+	function showOptions() {
+		options.current.classList.toggle('none')
+	}
 
 	function handlePostDelete(id) {
 		dispatch(deletePost(id))
@@ -41,8 +47,35 @@ function Post({ post, user, showFooter }) {
 
 	return (
 		<Card className='post mb-1'>
-			{isShare && <Share user={user} post={post} showModal={showShareModal} />}
-			{isEdit && <Edit post={post} showModal={showEditModal} />}
+			{isShare && (
+				<Share
+					user={user}
+					post={post}
+					title='Share post'
+					customSize={700}
+					showModal={showShareModal}
+				/>
+			)}
+			{isEdit && (
+				<Edit
+					post={post}
+					showModal={showEditModal}
+					title='Edit post'
+					customSize={700}
+				/>
+			)}
+			{post && user && post.user._id === user._id && (
+				<div ref={options} className='post__options none'>
+					<Flex align='center' onClick={handlePostEdit}>
+						<img src='/images/edit.png' alt='Edit' />
+						<p>Edit</p>
+					</Flex>
+					<Flex align='center' onClick={() => handlePostDelete(post._id)}>
+						<img src='/images/remove.png' alt='Delete' />
+						<p>Delete</p>
+					</Flex>
+				</div>
+			)}
 			<Flex>
 				<div className='post__user'>
 					<Link to={`/@${post.user.username}`}>
@@ -54,13 +87,25 @@ function Post({ post, user, showFooter }) {
 				</div>
 				<div className='post__details'>
 					<p>
-						<Link to={`/@${post.user.username}`}>
-							{post.user.firstName} {post.user.lastName}
-						</Link>
-						<span>@{post.user.username}</span>
+						<Flex justify='space-between' align='center'>
+							<div>
+								<Link to={`/@${post.user.username}`}>
+									{post.user.firstName} {post.user.lastName}
+								</Link>
+								<span>@{post.user.username}</span>
+							</div>
+							{post && user && post.user._id === user._id && (
+								<i
+									onClick={showOptions}
+									className='fas fa-ellipsis-h post__trigger'
+								></i>
+							)}
+						</Flex>
 					</p>
 					<h3 className='tertiary-heading'>{post.text}</h3>
-					{post.image && <img src={post.image} alt={post.image} />}
+					{post.image && (
+						<img className='post__image' src={post.image} alt={post.image} />
+					)}
 					{showFooter !== false && (
 						<PostFooter
 							post={post}

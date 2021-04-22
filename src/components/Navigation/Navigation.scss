@@ -1,7 +1,37 @@
 .nav {
+	@media (max-width: 768px) {
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+		background: white;
+		z-index: 100;
+		padding: 0.5rem;
+		margin-left: -1rem;
+	}
+
 	&__content {
 		position: sticky;
 		top: 0.5rem;
+
+		@media (max-width: 768px) {
+			display: flex;
+			align-items: center;
+			justify-content: space-evenly;
+
+			& > div {
+				display: none;
+			}
+			bottom: 100%;
+			p {
+				display: none;
+			}
+		}
+	}
+
+	@media (max-width: 768px) {
+		i {
+			font-size: 1.5rem;
+		}
 	}
 
 	button {
@@ -9,12 +39,32 @@
 	}
 
 	&__item {
-		display: block;
+		display: inline-block;
 		width: 100%;
-		padding: 0.5rem;
+		padding: 0.6rem;
 		transition: 300ms ease-in;
 		font-size: 1.2rem !important;
 		font-weight: 500;
+
+		&.nav__search {
+			display: none;
+		}
+
+		p {
+			margin-left: 1rem;
+		}
+
+		@media (max-width: 768px) {
+			p {
+				margin-left: 0;
+			}
+			> * {
+				justify-content: center;
+			}
+			&.nav__search {
+				display: block;
+			}
+		}
 
 		&.active {
 			i {

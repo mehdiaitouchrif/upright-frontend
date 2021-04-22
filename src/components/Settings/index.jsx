@@ -84,7 +84,6 @@ function Settings({ history, match }) {
 			<AppContainer>
 				<div className='settings__content'>
 					<GoBack text='Account settings' />
-
 					<div className='settings__body px-1'>
 						<form className='settings__form' onSubmit={updateProfile}>
 							<Flex align='center' className='my-1'>

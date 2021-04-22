@@ -38,6 +38,7 @@ function Posts({ user }) {
 				</Flex>
 			)}
 			{error && <Alert bg='danger'>{error}</Alert>}
+
 			{posts &&
 				posts.map((post) => <Post key={post._id} user={user} post={post} />)}
 		</div>

@@ -30,6 +30,7 @@ import {
 	userProfileReducer,
 	userUpdateReducer,
 	userDeleteReducer,
+	userListReducer,
 } from './reducers/userReducers'
 const reducer = combineReducers({
 	userLogin: loginReducer,
@@ -42,6 +43,7 @@ const reducer = combineReducers({
 	passwordReset: passwordResetRedcuer,
 	feedPosts: populateFeedReducer,
 	userPosts: userPostsReducer,
+	userList: userListReducer,
 	postCreation: createPostReducer,
 	postUpdate: postUpdateReducer,
 	postDelete: postDeleteReducer,

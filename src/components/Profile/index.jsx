@@ -15,9 +15,9 @@ import Button from '../UI/Button'
 import Post from '../Posts/Post'
 import AppContainer from '../AppContainer'
 import GoBack from '../UI/GoBack'
-import { Link } from 'react-router-dom'
+import Setup from './Setup'
 
-function Profile({ match, history }) {
+function Profile({ match }) {
 	// User details state
 	const userProfile = useSelector((state) => state.userProfile)
 	const { loading, user, error } = userProfile
@@ -50,6 +50,11 @@ function Profile({ match, history }) {
 		setFollow((prev) => (prev === 'Follow' ? 'Unfollow' : 'Follow'))
 	}
 
+	const [isSetup, setIsSetup] = useState(false)
+	function showModal() {
+		setIsSetup(!isSetup)
+	}
+
 	// Switch tabs
 	function switchTabs(str) {
 		if (str === 'shares') {
@@ -61,20 +66,25 @@ function Profile({ match, history }) {
 		}
 	}
 
+	const userUpdate = useSelector((state) => state.userUpdate)
+	const { success: successUpdate } = userUpdate
+
 	useEffect(() => {
-		if (!userInfo) {
-			history.push('/login')
-		} else {
+		if (!user || user.username !== match.params.username) {
 			dispatch(getUser(match.params.username))
-			dispatch(getUserPosts(userInfo.data._id))
-			dispatch(listSharedPosts(userInfo.data._id))
-			dispatch(listLikedPosts(userInfo.data._id))
+		} else {
+			dispatch(getUserPosts(user._id))
+			dispatch(listSharedPosts(user._id))
+			dispatch(listLikedPosts(user._id))
 		}
-	}, [userInfo, history, dispatch, match])
+	}, [user, dispatch, match.params.username, successUpdate])
 
 	return (
 		<div className='profile'>
 			<AppContainer>
+				{isSetup && (
+					<Setup customSize={450} showModal={showModal} user={user} />
+				)}
 				{loading && (
 					<Flex justify='center' className='my-2'>
 						<Spinner />
@@ -97,11 +107,14 @@ function Profile({ match, history }) {
 						<div className='profile__body'>
 							<Flex justify='space-between'>
 								<div className='profile__showcase'>
-									<img
-										className='profile__showcase--head'
-										src={user.profilePhoto}
-										alt={`${user.username}'s profile pic`}
-									/>
+									<div>
+										<img
+											className='profile__showcase--head'
+											src={user.profilePhoto}
+											alt={`${user.username}'s profile pic`}
+										/>
+									</div>
+
 									<p className='profile__body--name'>
 										{user.firstName} {user.lastName}
 									</p>
@@ -109,11 +122,14 @@ function Profile({ match, history }) {
 								</div>
 								<div className='profile__action mt-1'>
 									{userInfo && userInfo.data.username === user.username ? (
-										<Link to={`/@${user.username}/settings`}>
-											<Button type='button' className='rounded' bg='red'>
-												Set up profile
-											</Button>
-										</Link>
+										<Button
+											onClick={showModal}
+											type='button'
+											className='rounded'
+											bg='red'
+										>
+											Set up profile
+										</Button>
 									) : (
 										<Button
 											onClick={() => followUserHandler(user._id)}

@@ -38,7 +38,7 @@ function Home() {
 			<AppContainer>
 				<div className='home__main'>
 					{user && !user.isEmailConfirmed && !done && (
-						<Alert bg={`${!emailError ? 'success' : 'danger'}`}>
+						<Alert bg={`${!emailError ? 'info' : 'danger'}`}>
 							Your account is not verified.
 							{!emailError ? (
 								' Please check your email'

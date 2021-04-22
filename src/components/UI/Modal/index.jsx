@@ -10,7 +10,7 @@ function Modal({ children, className, showModal, title, customSize }) {
 				<Card className='modal__content'>
 					<Flex className='modal__head' justify='space-between' align='center'>
 						<h2 className='secondary-heading'>{title}</h2>
-						<p className='auth__close' onClick={showModal}>
+						<p className='modal__close' onClick={showModal}>
 							&times;
 						</p>
 					</Flex>

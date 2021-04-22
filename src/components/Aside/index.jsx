@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { getSuggestions, followUser } from '../../actions/userActions'
 import SearchBox from '../SearchBox'
 import Flex from '../UI/Flex'
@@ -9,9 +9,6 @@ import './Aside.scss'
 
 function Aside() {
 	const dispatch = useDispatch()
-
-	const currentUser = useSelector((state) => state.currentUser)
-	const { user } = currentUser
 
 	const userSuggestions = useSelector((state) => state.userSuggestions)
 	const { loading, suggestions } = userSuggestions
@@ -23,30 +20,15 @@ function Aside() {
 		dispatch(followUser(userId))
 	}
 
+	const { pathname } = useLocation()
+
 	useEffect(() => {
 		dispatch(getSuggestions())
 	}, [dispatch, followSuccess])
 
 	return (
-		<div className='aside'>
+		<div className={`aside ${pathname === '/search' && 'aside__responsive'}`}>
 			<SearchBox />
-			{/* {user ? (
-				<Link to={`/@${user.username}`}>
-					<Flex align='center' className='aside__profile'>
-						<img src={user.profilePhoto} alt='Profile' />
-						<div>
-							<p>{user.username}</p>
-							<p>
-								{user.firstName} {user.lastName}
-							</p>
-						</div>
-					</Flex>
-				</Link>
-			) : (
-				<Flex justify='center'>
-					<Spinner />
-				</Flex>
-			)} */}
 
 			<p className='lead'>Suggestions for you</p>
 			{suggestions &&

@@ -21,8 +21,18 @@ function Navigation({ logout, user }) {
 			<div className='nav__content'>
 				<Link to='/' className={`nav__item ${pathname === '/' && 'active'}`}>
 					<Flex align='center'>
-						<i className='fas fa-home mr-1'></i>
+						<i className='fas fa-home'></i>
 						<p>Home</p>
+					</Flex>
+				</Link>
+				<Link
+					to='/search'
+					className={`nav__item nav__search ${
+						pathname === '/search' && 'active'
+					}`}
+				>
+					<Flex align='center'>
+						<i className='fas fa-search'></i>
 					</Flex>
 				</Link>
 				<Link
@@ -34,16 +44,17 @@ function Navigation({ logout, user }) {
 					}`}
 				>
 					<Flex align='center'>
-						<i className='fas fa-user mr-1'></i>
+						<i className='fas fa-user'></i>
 						<p>Profile</p>
 					</Flex>
 				</Link>
+
 				<Link
 					to={user && `/@${user.username}/settings`}
 					className={`nav__item ${pathname.endsWith('settings') && 'active'}`}
 				>
 					<Flex align='center'>
-						<i className='fas fa-cog mr-1'></i>
+						<i className='fas fa-cog'></i>
 						<p>Settings</p>
 					</Flex>
 				</Link>

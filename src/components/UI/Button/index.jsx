@@ -16,7 +16,7 @@ function Button({ type, bg, className, onClick, disabled, children }) {
 
 Button.propTypes = {
 	type: PropTypes.string.isRequired,
-	children: PropTypes.string.isRequired,
+	children: PropTypes.string,
 	onClick: PropTypes.func,
 	disabled: PropTypes.bool,
 }

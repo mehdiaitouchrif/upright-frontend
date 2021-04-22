@@ -123,7 +123,7 @@ export const confirmationSendingReducer = (state = {}, action) => {
 		case SEND_CONFIRMATION_EMAIL_SUCCESS:
 			return {
 				loading: false,
-				success: action.payload,
+				success: true,
 			}
 		case SEND_CONFIRMATION_EMAIL_FAIL:
 			return {

@@ -68,7 +68,7 @@ export const createPost = (post) => async (dispatch, getState) => {
 	}
 }
 
-export const getUserPosts = () => async (dispatch, getState) => {
+export const getUserPosts = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: USER_POSTS_REQUEST })
 
@@ -81,7 +81,7 @@ export const getUserPosts = () => async (dispatch, getState) => {
 		}
 
 		const { data } = await axios.get(
-			`${process.env.REACT_APP_BACKEND_API_URL}/api/v1/users/${userInfo.data._id}/posts`,
+			`${process.env.REACT_APP_BACKEND_API_URL}/api/v1/users/${id}/posts`,
 			config
 		)
 
@@ -100,7 +100,7 @@ export const getUserPosts = () => async (dispatch, getState) => {
 	}
 }
 
-export const populateFeed = () => async (dispatch, getState) => {
+export const populateFeed = (page = 1) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: POPULATE_FEED_REQUEST })
 
@@ -113,13 +113,13 @@ export const populateFeed = () => async (dispatch, getState) => {
 		}
 
 		const { data } = await axios.get(
-			`${process.env.REACT_APP_BACKEND_API_URL}/api/v1/users/populate`,
+			`${process.env.REACT_APP_BACKEND_API_URL}/api/v1/users/populate?page=${page}`,
 			config
 		)
 
 		dispatch({
 			type: POPULATE_FEED_SUCCESS,
-			payload: data.data,
+			payload: data,
 		})
 	} catch (error) {
 		dispatch({
