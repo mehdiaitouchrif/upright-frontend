@@ -26,25 +26,77 @@ import {
 	LIKED_POSTS_REQUEST,
 	LIKED_POSTS_SUCCESS,
 	LIKED_POSTS_FAIL,
+	SINGLE_POST_REQUEST,
+	SINGLE_POST_SUCCESS,
+	SINGLE_POST_FAIL,
 } from '../constants/postConstants'
 
-export const createPostReducer = (state = {}, action) => {
+const initialState = {
+	feed: [],
+	post: {},
+	error: null,
+	loading: false,
+}
+export const postCrudReducer = (state = initialState, action) => {
 	switch (action.type) {
+		case POPULATE_FEED_REQUEST:
+		case SINGLE_POST_REQUEST:
 		case CREATE_POST_REQUEST:
+		case UPDATE_POST_REQUEST:
+		case DELETE_POST_REQUEST:
 			return {
+				...state,
 				loading: true,
+				error: null,
+			}
+		case POPULATE_FEED_SUCCESS:
+			return {
+				...state,
+				loading: false,
+				feed: action.payload.data,
+				error: null,
 			}
 		case CREATE_POST_SUCCESS:
 			return {
+				...state,
 				loading: false,
-				success: action.payload,
+				feed: [action.payload, ...state.feed],
+				error: null,
+			}
+		case UPDATE_POST_SUCCESS:
+			return {
+				...state,
+				loading: false,
+				feed: [
+					...state.feed.filter((com) => com._id !== action.payload._id),
+					action.payload,
+				],
+				error: null,
+			}
+		case DELETE_POST_SUCCESS:
+			return {
+				...state,
+				loading: false,
+				feed: state.feed.filter((post) => post._id !== action.payload),
+				error: null,
+			}
+		case SINGLE_POST_SUCCESS:
+			return {
+				...state,
+				loading: false,
+				post: action.payload,
+				error: null,
 			}
 		case CREATE_POST_FAIL:
+		case SINGLE_POST_FAIL:
+		case DELETE_POST_FAIL:
+		case UPDATE_POST_FAIL:
+		case POPULATE_FEED_FAIL:
 			return {
+				...state,
 				loading: false,
 				error: action.payload,
 			}
-
 		default:
 			return state
 	}
@@ -62,70 +114,6 @@ export const userPostsReducer = (state = { posts: [] }, action) => {
 				posts: action.payload,
 			}
 		case USER_POSTS_FAIL:
-			return {
-				loading: false,
-				error: action.payload,
-			}
-		default:
-			return state
-	}
-}
-
-export const populateFeedReducer = (state = { posts: [] }, action) => {
-	switch (action.type) {
-		case POPULATE_FEED_REQUEST:
-			return {
-				loading: true,
-			}
-		case POPULATE_FEED_SUCCESS:
-			return {
-				loading: false,
-				posts: action.payload.data,
-				pagination: action.payload.pagination,
-			}
-		case POPULATE_FEED_FAIL:
-			return {
-				loading: false,
-				error: action.payload,
-			}
-		default:
-			return state
-	}
-}
-
-export const postUpdateReducer = (state = {}, action) => {
-	switch (action.type) {
-		case UPDATE_POST_REQUEST:
-			return {
-				loading: true,
-			}
-		case UPDATE_POST_SUCCESS:
-			return {
-				loading: false,
-				success: action.payload,
-			}
-		case UPDATE_POST_FAIL:
-			return {
-				loading: false,
-				error: action.payload,
-			}
-		default:
-			return state
-	}
-}
-
-export const postDeleteReducer = (state = {}, action) => {
-	switch (action.type) {
-		case DELETE_POST_REQUEST:
-			return {
-				loading: true,
-			}
-		case DELETE_POST_SUCCESS:
-			return {
-				loading: false,
-				success: action.payload,
-			}
-		case DELETE_POST_FAIL:
 			return {
 				loading: false,
 				error: action.payload,
