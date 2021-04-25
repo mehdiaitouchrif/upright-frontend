@@ -119,7 +119,19 @@ function Profile({ match }) {
 										{user.firstName} {user.lastName}
 									</p>
 									<p className='profile__body--username'>@{user.username} </p>
+									{user.bio && <p>{user.bio} </p>}
+									{user.website && (
+										<a
+											style={{ fontWeight: 500, color: '#1DA1F2' }}
+											href={user.website}
+											rel='noreferrer'
+											target='_blank'
+										>
+											{user.website}
+										</a>
+									)}
 								</div>
+
 								<div className='profile__action mt-1'>
 									{userInfo && userInfo.data.username === user.username ? (
 										<Button
@@ -169,7 +181,7 @@ function Profile({ match }) {
 										activePosts === shared && 'active'
 									}`}
 								>
-									Shares & replies
+									Shares
 								</div>
 								<div
 									className={`profile__activity ${

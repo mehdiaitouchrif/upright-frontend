@@ -11,14 +11,9 @@ import Flex from '../UI/Flex'
 function Posts({ user }) {
 	const dispatch = useDispatch()
 
-	const feedPosts = useSelector((state) => state.feedPosts)
-	const { loading, error, posts } = feedPosts
-
-	const postCreation = useSelector((state) => state.postCreation)
-	const { success: createSuccess } = postCreation
-
-	const postDeletion = useSelector((state) => state.postDelete)
-	const { success: deleteSuccess } = postDeletion
+	// State
+	const postCrud = useSelector((state) => state.postCrud)
+	const { feed, loading, error } = postCrud
 
 	const postLike = useSelector((state) => state.postLike)
 	const { success: likeSuccess } = postLike
@@ -28,7 +23,7 @@ function Posts({ user }) {
 
 	useEffect(() => {
 		dispatch(populateFeed())
-	}, [dispatch, createSuccess, deleteSuccess, likeSuccess, shareSuccess])
+	}, [dispatch, likeSuccess, shareSuccess])
 
 	return (
 		<div className='posts'>
@@ -39,8 +34,13 @@ function Posts({ user }) {
 			)}
 			{error && <Alert bg='danger'>{error}</Alert>}
 
-			{posts &&
-				posts.map((post) => <Post key={post._id} user={user} post={post} />)}
+			{feed && feed.length === 0 && (
+				<div className='posts__empty'>
+					<p>Nothing here yet!</p>
+				</div>
+			)}
+			{feed &&
+				feed.map((post) => <Post key={post._id} user={user} post={post} />)}
 		</div>
 	)
 }

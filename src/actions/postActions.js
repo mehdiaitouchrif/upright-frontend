@@ -21,6 +21,9 @@ import {
 	SHARE_POST_FAIL,
 	SHARE_POST_REQUEST,
 	SHARE_POST_SUCCESS,
+	SINGLE_POST_FAIL,
+	SINGLE_POST_REQUEST,
+	SINGLE_POST_SUCCESS,
 	UPDATE_POST_FAIL,
 	UPDATE_POST_REQUEST,
 	UPDATE_POST_SUCCESS,
@@ -55,7 +58,7 @@ export const createPost = (post) => async (dispatch, getState) => {
 
 		dispatch({
 			type: CREATE_POST_SUCCESS,
-			payload: data.success,
+			payload: data.data,
 		})
 	} catch (error) {
 		dispatch({
@@ -68,6 +71,36 @@ export const createPost = (post) => async (dispatch, getState) => {
 	}
 }
 
+export const getSinglePost = (id) => async (dispatch, getState) => {
+	try {
+		dispatch({ type: SINGLE_POST_REQUEST })
+		const {
+			userLogin: { userInfo },
+		} = getState()
+
+		config = {
+			headers: { ...config.headers, Authorization: `Bearer ${userInfo.token}` },
+		}
+
+		const { data } = await axios.get(
+			`${process.env.REACT_APP_BACKEND_API_URL}/api/v1/posts/${id}`,
+			config
+		)
+
+		dispatch({
+			type: SINGLE_POST_SUCCESS,
+			payload: data.data,
+		})
+	} catch (error) {
+		dispatch({
+			type: SINGLE_POST_FAIL,
+			payload:
+				error.response && error.response.data.error
+					? error.response.data.error
+					: error.message,
+		})
+	}
+}
 export const getUserPosts = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: USER_POSTS_REQUEST })
@@ -152,7 +185,7 @@ export const updatePost = (post) => async (dispatch, getState) => {
 
 		dispatch({
 			type: UPDATE_POST_SUCCESS,
-			payload: data.success,
+			payload: data.data,
 		})
 	} catch (error) {
 		dispatch({
@@ -177,14 +210,14 @@ export const deletePost = (id) => async (dispatch, getState) => {
 			headers: { ...config.headers, Authorization: `Bearer ${userInfo.token}` },
 		}
 
-		const { data } = await axios.delete(
+		await axios.delete(
 			`${process.env.REACT_APP_BACKEND_API_URL}/api/v1/posts/${id}`,
 			config
 		)
 
 		dispatch({
 			type: DELETE_POST_SUCCESS,
-			payload: data.success,
+			payload: id,
 		})
 	} catch (error) {
 		dispatch({

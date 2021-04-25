@@ -17,6 +17,7 @@ function Edit({ post, showModal, title, customSize }) {
 
 	function updateHandler() {
 		dispatch(updatePost({ text, image, _id: post._id }))
+		showModal()
 	}
 
 	useEffect(() => {

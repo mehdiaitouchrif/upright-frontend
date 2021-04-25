@@ -1,12 +1,13 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { deletePost, likePost } from '../../../actions/postActions'
+import { likePost, deletePost } from '../../../actions/postActions'
 import Card from '../../UI/Card'
 import Flex from '../../UI/Flex'
 import Share from '../Share'
 import Edit from '../Edit'
+import Comment from '../Comment'
 import './Post.scss'
 import PostFooter from './PostFooter'
 
@@ -37,12 +38,21 @@ function Post({ post, user, showFooter }) {
 		setIsEdit(!isEdit)
 	}
 
-	function handlePostShare(id) {
+	const [isComment, setIsComment] = useState(false)
+	function showCommentModal() {
+		setIsComment(!isComment)
+	}
+
+	function handlePostShare() {
 		showShareModal()
 	}
 
 	function handlePostEdit() {
 		showEditModal()
+	}
+
+	function handlePostComment() {
+		showCommentModal()
 	}
 
 	return (
@@ -64,18 +74,16 @@ function Post({ post, user, showFooter }) {
 					customSize={700}
 				/>
 			)}
-			{post && user && post.user._id === user._id && (
-				<div ref={options} className='post__options none'>
-					<Flex align='center' onClick={handlePostEdit}>
-						<img src='/images/edit.png' alt='Edit' />
-						<p>Edit</p>
-					</Flex>
-					<Flex align='center' onClick={() => handlePostDelete(post._id)}>
-						<img src='/images/remove.png' alt='Delete' />
-						<p>Delete</p>
-					</Flex>
-				</div>
+			{isComment && (
+				<Comment
+					post={post}
+					showModal={showCommentModal}
+					title='Comment post'
+					customSize={700}
+					user={user}
+				/>
 			)}
+
 			<Flex>
 				<div className='post__user'>
 					<Link to={`/@${post.user.username}`}>
@@ -102,22 +110,37 @@ function Post({ post, user, showFooter }) {
 							)}
 						</Flex>
 					</p>
-					<h3 className='tertiary-heading'>{post.text}</h3>
-					{post.image && (
-						<img className='post__image' src={post.image} alt={post.image} />
-					)}
-					{showFooter !== false && (
-						<PostFooter
-							post={post}
-							user={user}
-							handlePostDelete={handlePostDelete}
-							handlePostLike={handlePostLike}
-							handlePostShare={handlePostShare}
-							handlePostEdit={handlePostEdit}
-						/>
-					)}
+					<Link
+						style={{ display: 'block', width: '100%', textDecoration: 'none' }}
+						to={`/post/${post._id}`}
+					>
+						<h3 className='tertiary-heading'>{post.text}</h3>
+						{post.image && (
+							<img className='post__image' src={post.image} alt={post.image} />
+						)}
+					</Link>
 				</div>
 			</Flex>
+			{showFooter !== false && (
+				<PostFooter
+					post={post}
+					handlePostLike={handlePostLike}
+					handlePostShare={handlePostShare}
+					handlePostComment={handlePostComment}
+				/>
+			)}
+			{post && user && post.user._id === user._id && (
+				<div ref={options} className='post__options mt-2 none'>
+					<Flex align='center' onClick={handlePostEdit}>
+						<img src='/images/edit.png' alt='Edit' />
+						<p>Edit</p>
+					</Flex>
+					<Flex align='center' onClick={() => handlePostDelete(post._id)}>
+						<img src='/images/remove.png' alt='Delete' />
+						<p>Delete</p>
+					</Flex>
+				</div>
+			)}
 		</Card>
 	)
 }

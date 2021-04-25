@@ -171,6 +171,8 @@ export const deleteUser = (id) => async (dispatch, getState) => {
 			`${process.env.REACT_APP_BACKEND_API_URL}/api/v1/users/${id}/`,
 			config
 		)
+		localStorage.removeItem('userInfo')
+
 		dispatch({
 			type: USER_DELETE_SUCCESS,
 			payload: data.success,

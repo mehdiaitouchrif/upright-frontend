@@ -14,15 +14,17 @@ import {
 	emailConfirmationReducer,
 } from './reducers/authReducers'
 import {
-	createPostReducer,
-	populateFeedReducer,
+	// createPostReducer,
+	// singlePostReducer,
+	// populateFeedReducer,
 	userPostsReducer,
-	postUpdateReducer,
-	postDeleteReducer,
+	// postUpdateReducer,
+	// postDeleteReducer,
 	postLikeReducer,
 	postShareReducer,
 	likedPostsReducer,
 	sharedPostsReducer,
+	postCrudReducer,
 } from './reducers/postReducers'
 import {
 	userFollowReducer,
@@ -32,6 +34,8 @@ import {
 	userDeleteReducer,
 	userListReducer,
 } from './reducers/userReducers'
+import { commentCrudReducer } from './reducers/commentReducers'
+
 const reducer = combineReducers({
 	userLogin: loginReducer,
 	userSignUp: signUpReducer,
@@ -41,14 +45,12 @@ const reducer = combineReducers({
 	emailConfirmation: emailConfirmationReducer,
 	resetRequest: resetRequestReducer,
 	passwordReset: passwordResetRedcuer,
-	feedPosts: populateFeedReducer,
+	postCrud: postCrudReducer,
 	userPosts: userPostsReducer,
 	userList: userListReducer,
-	postCreation: createPostReducer,
-	postUpdate: postUpdateReducer,
-	postDelete: postDeleteReducer,
 	postLike: postLikeReducer,
 	postShare: postShareReducer,
+	commentCrud: commentCrudReducer,
 	likedPosts: likedPostsReducer,
 	sharedPosts: sharedPostsReducer,
 	userFollow: userFollowReducer,

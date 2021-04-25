@@ -1,0 +1,79 @@
+.postPage {
+	&__content {
+		border: 1px solid var(--gray-light);
+	}
+
+	&__stats {
+		margin-top: 1rem;
+		padding: 1rem 0;
+		border-top: 1px solid var(--gray-light);
+	}
+
+	&__input {
+		display: inline-block;
+		border: 1px solid white;
+		outline: none;
+		padding: 0.5rem 1rem;
+		font-family: inherit;
+		font-size: 1rem;
+		border-radius: 1rem;
+		background-color: var(--gray-light);
+		width: 100%;
+		margin-left: 0.5rem;
+		margin-bottom: 1rem;
+		transition: 300ms ease;
+
+		&:focus {
+			border: 1px solid var(--red);
+		}
+	}
+
+	&__user {
+		width: 3rem;
+		margin-right: 0.5rem;
+		&--name {
+			font-weight: 600;
+		}
+		img {
+			width: 100%;
+			object-fit: cover;
+			border-radius: 50%;
+		}
+	}
+
+	&__form,
+	&__comments {
+		padding: 0.5rem 1rem;
+		border-bottom: 1px solid var(--gray-light);
+	}
+
+	&__comment {
+		margin: 0.5rem 0;
+
+		&--text {
+			background-color: var(--gray-light);
+			padding: 0.25rem 0.75rem;
+			border-radius: 1rem;
+		}
+
+		&--options {
+			width: auto;
+			button {
+				display: inline-block;
+				width: 100%;
+				padding: 0.4rem;
+				font-size: 0.9rem;
+				border: none;
+				outline: none;
+				margin: 2px 0;
+				cursor: pointer;
+				transition: 300ms ease;
+
+				&:hover {
+					background-color: var(--red);
+					color: white;
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,19 @@
+._404 {
+	max-width: 700px;
+	margin: auto;
+	padding: 2rem;
+	text-align: center;
+	&__image {
+		text-align: center;
+		width: 100%;
+		margin-top: 2rem;
+		img {
+			width: 100%;
+		}
+	}
+	&__link {
+		font-size: 1.1rem;
+		color: #737cfe;
+		font-weight: 600;
+	}
+}

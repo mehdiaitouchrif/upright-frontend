@@ -12,6 +12,7 @@ import Button from '../UI/Button'
 import AppContainer from '../AppContainer'
 import './Settings.scss'
 import GoBack from '../UI/GoBack'
+import TextArea from '../UI/FormComponents/TextArea'
 
 function Settings({ history, match }) {
 	// Current user state
@@ -39,6 +40,8 @@ function Settings({ history, match }) {
 	const [lastName, setLastName] = useState(user && user.lastName)
 	const [email, setEmail] = useState(user && user.email)
 	const [username, setUsername] = useState(user && user.username)
+	const [bio, setBio] = useState(user && user.bio)
+	const [website, setWesbite] = useState(user && user.website)
 
 	const [currentPassword, setCurrentPassword] = useState('')
 	const [newPassword, setNewPassword] = useState('')
@@ -56,6 +59,8 @@ function Settings({ history, match }) {
 				lastName,
 				email,
 				username,
+				bio,
+				website,
 				_id: user._id,
 			})
 		)
@@ -77,7 +82,7 @@ function Settings({ history, match }) {
 		if (!user) {
 			dispatch(getUser(match.params.username))
 		}
-	}, [dispatch, match, history, user])
+	}, [dispatch, match, history, user, updateSuccess])
 
 	return (
 		<div className='settings'>
@@ -122,6 +127,22 @@ function Settings({ history, match }) {
 									value={username}
 									onChange={(e) => setUsername(e.target.value)}
 									name='username'
+								/>
+							</FormGroup>
+							<FormGroup>
+								<TextArea
+									value={bio}
+									placeholder='Say something about yourself'
+									onChange={(e) => setBio(e.target.value)}
+									name='bio'
+								/>
+							</FormGroup>
+							<FormGroup>
+								<TextInput
+									placeholder='Do you have a website?'
+									value={website}
+									onChange={(e) => setWesbite(e.target.value)}
+									name='website'
 								/>
 							</FormGroup>
 							<Button type='submit' bg='blue' className='rounded my-1'>

@@ -5,7 +5,6 @@
 	border-radius: 2px;
 	background-color: var(--white);
 	position: relative;
-
 	&__user {
 		margin-right: 1rem;
 		img {
@@ -28,9 +27,8 @@
 		width: 40%;
 		background-color: white;
 		position: absolute;
-		top: 2.5rem;
+		top: 0;
 		right: 0;
-		z-index: 10;
 
 		& > * {
 			padding: 0.5rem 1rem;
@@ -53,8 +51,38 @@
 		height: 263px;
 	}
 
+	&__actions {
+		font-size: 1.25rem;
+		color: var(--gray-dark);
+		padding: 0.5rem 2rem;
+		margin-top: 1rem;
+		cursor: pointer;
+
+		i {
+			padding: 0.5rem;
+			border-radius: 50%;
+		}
+
+		i.red:hover {
+			color: red;
+			background-color: var(--danger);
+		}
+
+		i.green:hover {
+			color: var(--green);
+			background-color: rgb(217, 245, 211);
+		}
+
+		i.blue:hover {
+			color: #23a6e0;
+			background-color: rgb(191, 226, 243);
+		}
+	}
+
 	&__details {
 		width: 100%;
+		display: block;
+		text-decoration: none !important;
 		span {
 			margin-left: 0.25rem;
 			color: #666;

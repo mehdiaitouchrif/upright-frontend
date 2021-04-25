@@ -81,8 +81,13 @@ function Navigation({ logout, user }) {
 				</div>
 			</div>
 			{isCreate && (
-				<Modal showModal={showModal} customSize={700} title='Create post'>
-					<Create />
+				<Modal
+					showModal={showModal}
+					user={user}
+					customSize={700}
+					title='Create post'
+				>
+					<Create user={user} />
 				</Modal>
 			)}
 		</div>

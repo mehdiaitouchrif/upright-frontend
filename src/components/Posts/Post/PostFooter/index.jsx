@@ -1,41 +1,29 @@
-import './PostFooter.scss'
 import Flex from '../../../UI/Flex'
+import './PostFooter.scss'
 
 function PostFooter({
-	user,
 	post,
-	handlePostDelete,
 	handlePostLike,
 	handlePostShare,
-	handlePostEdit,
+	handlePostComment,
 }) {
 	return (
 		<div className='post-footer'>
-			<Flex justify='space-between' align='center' className='post__tools'>
-				<Flex align='center' onClick={() => handlePostLike(post._id)}>
-					<img src='/images/like.png' alt='Like' />
-					<p>{post.likes.length}</p>
+			<Flex justify='space-between' className='post__actions'>
+				<Flex align='center'>
+					<i
+						onClick={() => handlePostLike(post._id)}
+						className='far fa-heart red'
+					></i>
+					<p style={{ fontSize: 16 }}>{post.likes.length}</p>
 				</Flex>
 				<Flex align='center'>
-					<img src='/images/comment.png' alt='Comment' />
-					<p></p>
+					<i onClick={handlePostComment} className='far fa-comment green'></i>
 				</Flex>
-				<Flex align='center' onClick={handlePostShare}>
-					<img src='/images/share.png' alt='Share' />
-					<p>{post && post.shares.length} </p>
+				<Flex align='center'>
+					<i onClick={handlePostShare} className='fas fa-share blue'></i>
+					<p style={{ fontSize: 16 }}>{post.shares.length}</p>
 				</Flex>
-				{/* {post && user && post.user._id === user._id && (
-					<>
-						<Flex align='center' onClick={handlePostEdit}>
-							<img src='/images/edit.png' alt='Edit' />
-							<p>Edit</p>
-						</Flex>
-						<Flex align='center' onClick={() => handlePostDelete(post._id)}>
-							<img src='/images/remove.png' alt='Delete' />
-							<p>Delete</p>
-						</Flex>
-					</>
-				)} */}
 			</Flex>
 		</div>
 	)

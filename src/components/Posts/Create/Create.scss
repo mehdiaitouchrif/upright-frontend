@@ -8,6 +8,16 @@
 		}
 	}
 
+	&__user {
+		width: 3.5rem;
+		height: 3.5rem;
+		img {
+			height: 3.5rem;
+			width: 3.5rem;
+			border-radius: 10rem;
+			object-fit: cover;
+		}
+	}
 	&__text {
 		display: inline-block;
 		width: 100%;

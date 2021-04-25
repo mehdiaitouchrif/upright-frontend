@@ -1,46 +1,48 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { addComment } from '../../../actions/commentActions'
 import { Link } from 'react-router-dom'
-import { sharePost } from '../../../actions/postActions'
 import Modal from '../../UI/Modal'
 import TextArea from '../../UI/FormComponents/TextArea'
 import Button from '../../UI/Button'
 import Flex from '../../UI/Flex'
-import './Share.scss'
+import './Comment.scss'
+import Spinner from '../../UI/Spinner'
 
-function Share({ post, user, showModal, customSize, title }) {
-	const [text, setText] = useState(null)
+function Comment({ post, user, showModal, title, customSize }) {
+	const [comment, setComment] = useState('')
+
+	const commentCrud = useSelector((state) => state.commentCrud)
+	const { loading } = commentCrud
 
 	const dispatch = useDispatch()
 
-	const sharePostHandler = (postId) => {
-		dispatch(sharePost(postId, text))
-	}
+	// function addCommentHandler() {
+	// 	dispatch(addComment(post._id, comment))
+	// 	if (!loading) {
+	// 		showModal()
+	// 	}
+	// }
 
 	return (
-		<Modal
-			className='share'
-			showModal={showModal}
-			customSize={customSize}
-			title={title}
-		>
+		<Modal title={title} showModal={showModal} customSize={customSize}>
 			<Flex align='center'>
-				<div className='share__user'>
+				<div className='comment__user'>
 					<img src={user.profilePhoto} alt={user.username} />
 				</div>
 				<TextArea
 					name='text'
-					className='share__input'
-					placeholder='Your quote'
-					onChange={(e) => setText(e.target.value)}
-					value={text}
+					className='comment__input'
+					placeholder='Your comment'
+					onChange={(e) => setComment(e.target.value)}
+					value={comment}
 				/>
 			</Flex>
 			<Flex>
-				<div className='share__user' style={{ visibility: 'hidden' }}>
+				<div className='comment__user' style={{ visibility: 'hidden' }}>
 					<img src={user.profilePhoto} alt={user.username} />
 				</div>
-				<div className='share__post my-1'>
+				<div className='comment__post my-1'>
 					<Flex>
 						<div className='post__user'>
 							<Link to={`/@${post.user.username}`}>
@@ -73,18 +75,20 @@ function Share({ post, user, showModal, customSize, title }) {
 					</Flex>
 				</div>
 			</Flex>
+			{loading && (
+				<Flex justify='center my-1'>
+					<Spinner />
+				</Flex>
+			)}
 			<Flex justify='right'>
-				<Button
-					onClick={() => sharePostHandler(post._id)}
-					type='submit'
-					bg='blue'
-					className='rounded'
-				>
-					Share
-				</Button>
+				<form>
+					<Button type='submit' bg='blue' className='rounded'>
+						Comment
+					</Button>
+				</form>
 			</Flex>
 		</Modal>
 	)
 }
 
-export default Share
+export default Comment

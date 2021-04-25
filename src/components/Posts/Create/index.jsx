@@ -9,7 +9,7 @@ import Flex from '../../UI/Flex'
 import './Create.scss'
 import Spinner from '../../UI/Spinner'
 
-function Create() {
+function Create({ user }) {
 	const [text, setText] = useState('')
 	const [image, setImage] = useState('')
 	const [uploading, setUploading] = useState(false)
@@ -50,6 +50,8 @@ function Create() {
 		e.preventDefault()
 		if (image) {
 			dispatch(createPost({ text, image }))
+		} else if (text.trim() === '') {
+			alert("Post can't be empty")
 		} else {
 			dispatch(createPost({ text }))
 		}
@@ -60,7 +62,9 @@ function Create() {
 	return (
 		<Card className='create my-1'>
 			<Flex className='create__upper'>
-				<img src='/images/profile.webp' alt='Test' />
+				<div className='create__user'>
+					<img src={user && user.profilePhoto} alt='Test' />
+				</div>
 				<Flex direction='column' className='w-full'>
 					<form onSubmit={submitPost}>
 						<textarea
