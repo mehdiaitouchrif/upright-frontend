@@ -13,6 +13,7 @@ import Flex from '../UI/Flex'
 import Spinner from '../UI/Spinner'
 import './Auth.scss'
 import SignUp from './SignUp'
+import Meta from '../Meta/Meta'
 
 function Login({ history }) {
 	const [email, setEmail] = useState('')
@@ -42,6 +43,7 @@ function Login({ history }) {
 	}, [history, userInfo])
 	return (
 		<div className='auth'>
+			<Meta />
 			<Container size='md' className='auth__content'>
 				<Grid cols={2} gap={2}>
 					<div className='auth__side'>

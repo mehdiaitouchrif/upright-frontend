@@ -11,9 +11,10 @@ import Flex from '../UI/Flex'
 import Container from '../UI/Container'
 import FormGroup from '../UI/FormComponents/FormGroup'
 import TextInput from '../UI/FormComponents/TextInput'
-import './ForgotPassword.scss'
 import Alert from '../UI/Alert'
 import Spinner from '../UI/Spinner'
+import Meta from '../Meta/Meta'
+import './ForgotPassword.scss'
 
 function ForgotPassword({ history }) {
 	// Nav authentication
@@ -76,6 +77,7 @@ function ForgotPassword({ history }) {
 
 	return (
 		<div className='forgot-password'>
+			<Meta title="Forgotten Password | Can't Login | Upright" />
 			<Flex
 				align='center'
 				justify='space-between'

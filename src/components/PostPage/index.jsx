@@ -19,6 +19,7 @@ import Alert from '../UI/Alert'
 import './PostPage.scss'
 import Modal from '../UI/Modal'
 import Button from '../UI/Button'
+import Meta from '../Meta/Meta'
 
 function PostPage({ match }) {
 	const [comment, setComment] = useState('')
@@ -87,6 +88,7 @@ function PostPage({ match }) {
 
 	return (
 		<div className='postPage'>
+			<Meta title='Upright' />
 			<AppContainer>
 				<div className='postPage__content'>
 					<GoBack text='Post' />

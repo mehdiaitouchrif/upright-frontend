@@ -13,6 +13,7 @@ import AppContainer from '../AppContainer'
 import './Settings.scss'
 import GoBack from '../UI/GoBack'
 import TextArea from '../UI/FormComponents/TextArea'
+import Meta from '../Meta/Meta'
 
 function Settings({ history, match }) {
 	// Current user state
@@ -86,6 +87,7 @@ function Settings({ history, match }) {
 
 	return (
 		<div className='settings'>
+			<Meta title='Settings | Upright' />
 			<AppContainer>
 				<div className='settings__content'>
 					<GoBack text='Account settings' />

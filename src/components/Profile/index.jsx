@@ -16,6 +16,7 @@ import Post from '../Posts/Post'
 import AppContainer from '../AppContainer'
 import GoBack from '../UI/GoBack'
 import Setup from './Setup'
+import Meta from '../Meta/Meta'
 
 function Profile({ match }) {
 	// User details state
@@ -93,6 +94,7 @@ function Profile({ match }) {
 				{error && <Alert bg='danger'>{error}</Alert>}
 				{user && (
 					<div className='profile__content'>
+						<Meta title={`${user.firstName} ${user.lastName} | Upright`} />
 						<GoBack text={`${user.firstName} ${user.lastName}`} />
 						<div className='profile__head'>
 							<div className='profile__head--cover'>

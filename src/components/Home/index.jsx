@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react'
 import './Home.scss'
 import AppContainer from '../AppContainer'
 import Alert from '../UI/Alert'
+import Meta from '../Meta/Meta'
 
 function Home() {
 	// Current user state
@@ -35,6 +36,7 @@ function Home() {
 
 	return (
 		<main className='home'>
+			<Meta title='Upright' />
 			<AppContainer>
 				<div className='home__main'>
 					{user && !user.isEmailConfirmed && !done && (
