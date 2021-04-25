@@ -25,7 +25,6 @@ import {
 	RESET_PASSWORD_SUCCESS,
 	RESET_PASSWORD_FAIL,
 } from '../constants/authConstants'
-import { USER_DELETE_SUCCESS } from '../constants/userConstants'
 
 export const loginReducer = (state = { userInfo: {} }, action) => {
 	switch (action.type) {

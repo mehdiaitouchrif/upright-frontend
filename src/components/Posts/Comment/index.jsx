@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { addComment } from '../../../actions/commentActions'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Modal from '../../UI/Modal'
 import TextArea from '../../UI/FormComponents/TextArea'
@@ -14,15 +13,6 @@ function Comment({ post, user, showModal, title, customSize }) {
 
 	const commentCrud = useSelector((state) => state.commentCrud)
 	const { loading } = commentCrud
-
-	const dispatch = useDispatch()
-
-	// function addCommentHandler() {
-	// 	dispatch(addComment(post._id, comment))
-	// 	if (!loading) {
-	// 		showModal()
-	// 	}
-	// }
 
 	return (
 		<Modal title={title} showModal={showModal} customSize={customSize}>

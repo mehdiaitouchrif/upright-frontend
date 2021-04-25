@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { da } from 'date-fns/locale'
 import {
 	ADD_COMMENT_FAIL,
 	ADD_COMMENT_REQUEST,
