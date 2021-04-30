@@ -12,6 +12,7 @@ import ForgotPassword from './components/ForgotPassword'
 import AppContainer from './components/AppContainer'
 import PostPage from './components/PostPage'
 import NotFound from './components/404'
+import ConfirmEmail from './components/ConfirmEmail'
 
 function App() {
 	return (
@@ -24,6 +25,7 @@ function App() {
 				<Route path='/login' component={Login} />
 				<Route exact path='/' component={Home} />
 				<Route exact path='/forgotpassword' component={ForgotPassword} />
+				<Route exact path='/confirmemail/:token' component={ConfirmEmail} />
 				<Route path='*' component={NotFound} />
 			</Switch>
 		</Router>
