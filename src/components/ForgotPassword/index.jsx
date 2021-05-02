@@ -86,7 +86,7 @@ function ForgotPassword({ history }) {
 				<a href='/login' className='forgot-password__logo'>
 					Upright
 				</a>
-				<form onSubmit={loginHandler}>
+				<form onSubmit={loginHandler} className='forgot-password__form'>
 					<Flex align='center'>
 						<TextInput
 							value={loginEmail}
